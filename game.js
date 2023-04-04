@@ -324,7 +324,6 @@ laser.intervalId = setInterval(moveLaser, 100);
 lasers.push(laser);
 }
 
-
 function draw() {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
