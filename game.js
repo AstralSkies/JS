@@ -282,42 +282,48 @@ direction: firingDirection, // Add the direction property to the laser
 };
 
 function moveLaser() {
-const dx =
-laser.direction === "left"
-  ? -1
-  : laser.direction === "right"
-  ? 1
-  : 0;
-const dy =
-laser.direction === "up" ? -1 : laser.direction === "down" ? 1 : 0;
-laser.x += dx;
-laser.y += dy;
-
-drawTile(laser.x, laser.y, laser.color);
-
-for (let i = 0; i < enemies.length; i++) {
-const enemy = enemies[i];
-if (laser.x === enemy.x && laser.y === enemy.y && enemy.opacity >= 0.7) {
-
-  clearInterval(laser.intervalId);
-  lasers.splice(lasers.indexOf(laser), 1);
-  enemies.splice(i, 1);
-  killedEnemies++;
-  drawText(`Killed enemies: ${killedEnemies}`, 10, 20);
-  respawnEnemies();
-  return;
-}
-}
-
-if (laser.y < 0 || laser.y > 10 || laser.x < 0 || laser.x > 10) {
-clearInterval(laser.intervalId);
-lasers.splice(lasers.indexOf(laser), 1);
-}
-}
+    const dx =
+      laser.direction === "left"
+        ? -1
+        : laser.direction === "right"
+        ? 1
+        : 0;
+    const dy =
+      laser.direction === "up" ? -1 : laser.direction === "down" ? 1 : 0;
+    laser.x += dx;
+    laser.y += dy;
+  
+    drawTile(laser.x, laser.y, laser.color);
+  
+    for (let i = 0; i < enemies.length; i++) {
+      const enemy = enemies[i];
+      if (laser.x === enemy.x && laser.y === enemy.y && enemy.opacity >= 0.7) {
+  
+        // Play a sound effect when an enemy is hit by a laser
+        const hitSound = new Audio('assets/hit.mp3');
+        hitSound.play();
+  
+        clearInterval(laser.intervalId);
+        lasers.splice(lasers.indexOf(laser), 1);
+        enemies.splice(i, 1);
+        killedEnemies++;
+        drawText(`Killed enemies: ${killedEnemies}`, 10, 20);
+        respawnEnemies();
+        return;
+      }
+    }
+  
+    if (laser.y < 0 || laser.y > 10 || laser.x < 0 || laser.x > 10) {
+      clearInterval(laser.intervalId);
+      lasers.splice(lasers.indexOf(laser), 1);
+    }
+  }
+  
 
 laser.intervalId = setInterval(moveLaser, 100);
 lasers.push(laser);
 }
+
 
 function draw() {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
