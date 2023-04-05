@@ -19,7 +19,6 @@ canvas {
 }
 
 /* Button styles */
-/* Button styles */
 .button {
   position: absolute;
   background-color: #A0A0A0;
@@ -37,23 +36,23 @@ canvas {
 }
 
 #leftButton {
-  left: calc(10% - 25px); /* Adjust position to center */
-  bottom: 14%; /* Increase bottom value to position higher */
+  left: 10%;
+  bottom: 10%;
 }
 
 #upButton {
-  left: calc(20% - 25px); /* Adjust position to center */
+  left: 20%;
   bottom: 16%;
 }
 
 #downButton {
-  left: calc(20% - 25px); /* Adjust position to center */
+  left: 20%;
   bottom: 4%;
 }
 
 #rightButton {
-  left: calc(30% - 25px); /* Adjust position to center */
-  bottom: 14%; /* Increase bottom value to position higher */
+  left: 30%;
+  bottom: 10%;
 }
 
 #fireButton {
@@ -76,7 +75,6 @@ canvas {
   background-color: #F08080;
   cursor: pointer;
 }
-
 
 /* Active (press down) styles */
 .button:active,
@@ -106,6 +104,12 @@ canvas {
 
 
 /* Arrow characters */
+.button::before {
+  content: "";
+  display: block;
+  line-height: 50px;
+}
+
 #leftButton::before {
   content: "←";
 }
