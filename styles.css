@@ -4,8 +4,10 @@
   width: 300px;
   height: 400px;
   margin: 0 auto;
-  background-color: white;
+  background-color: #D3D3D3;
   overflow: hidden;
+  border: 5px solid #8B8B8B;
+  border-radius: 10px;
 }
 
 /* Canvas styles */
@@ -19,7 +21,7 @@ canvas {
 /* Button styles */
 .button {
   position: absolute;
-  background-color: red;
+  background-color: #A0A0A0;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -28,7 +30,9 @@ canvas {
   text-align: center;
   line-height: 50px;
   font-size: 24px;
-  color: white;
+  color: #FFF;
+  font-family: 'Press Start 2P', cursive;
+  border: 2px solid #000; /* Add a 2px black stroke around the circle */
 }
 
 #leftButton {
@@ -52,7 +56,7 @@ canvas {
 }
 
 #fireButton {
-  background-color: grey;
+  background-color: #FFA07A;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -68,7 +72,7 @@ canvas {
 #downButton:hover,
 #rightButton:hover,
 #fireButton:hover {
-  background-color: darkred;
+  background-color: #F08080;
   cursor: pointer;
 }
 
@@ -98,6 +102,14 @@ canvas {
   }
 }
 
+/* If the device has been rotated to landscape ensure the canvas is centered */
+@media screen and (orientation: landscape) {
+  canvas {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
 /* Arrow characters */
 #leftButton::before {
   content: "←";
@@ -114,3 +126,6 @@ canvas {
 #rightButton::before {
   content: "→";
 }
+
+/* Font for buttons */
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
