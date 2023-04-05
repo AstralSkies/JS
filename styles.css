@@ -76,6 +76,7 @@ canvas {
   cursor: pointer;
 }
 
+
 /* Active (press down) styles */
 .button:active,
 #leftButton:active,
@@ -102,21 +103,7 @@ canvas {
   }
 }
 
-/* If the device has been rotated to landscape ensure the canvas is centered */
-@media screen and (orientation: landscape) {
-  canvas {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-}
-
 /* Arrow characters */
-.button::before {
-  content: "";
-  display: block;
-  line-height: 50px;
-}
-
 #leftButton::before {
   content: "←";
 }
