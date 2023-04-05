@@ -111,6 +111,12 @@ canvas {
 }
 
 /* Arrow characters */
+.button::before {
+  content: "";
+  display: block;
+  line-height: 50px;
+}
+
 #leftButton::before {
   content: "←";
 }
