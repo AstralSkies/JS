@@ -102,6 +102,23 @@ canvas {
   }
 }
 
+/* If the device has been rotated to landscape ensure the canvas is centered */
+@media screen and (orientation: landscape) {
+  canvas {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+/* Media query for laptop-sized devices (greater than 1024px) */
+@media screen and (min-width: 1024px) {
+  canvas {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 
 /* Arrow characters */
 .button::before {
