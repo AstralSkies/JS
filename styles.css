@@ -38,7 +38,7 @@ canvas {
 
 #leftButton {
   left: calc(10% - 25px); /* Adjust position to center */
-  bottom: 10%;
+  bottom: 14%; /* Increase bottom value to position higher */
 }
 
 #upButton {
@@ -53,7 +53,7 @@ canvas {
 
 #rightButton {
   left: calc(30% - 25px); /* Adjust position to center */
-  bottom: 10%;
+  bottom: 14%; /* Increase bottom value to position higher */
 }
 
 #fireButton {
@@ -104,11 +104,10 @@ canvas {
   }
 }
 
+
 /* Arrow characters */
 #leftButton::before {
   content: "←";
-  /* position the arrow character slightly higher */
-
 }
 
 #upButton::before {
