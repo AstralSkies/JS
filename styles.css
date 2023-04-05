@@ -19,6 +19,7 @@ canvas {
 }
 
 /* Button styles */
+/* Button styles */
 .button {
   position: absolute;
   background-color: #A0A0A0;
@@ -34,7 +35,6 @@ canvas {
   font-family: 'Press Start 2P', cursive;
   border: 2px solid #000; /* Add a 2px black stroke around the circle */
 }
-
 #leftButton {
   left: 10%;
   bottom: 10%;
@@ -106,18 +106,26 @@ canvas {
 /* Arrow characters */
 #leftButton::before {
   content: "←";
+  line-height: 50px;
+  vertical-align: middle;
 }
 
 #upButton::before {
   content: "↑";
+  line-height: 50px;
+  vertical-align: middle;
 }
 
 #downButton::before {
   content: "↓";
+  line-height: 50px;
+  vertical-align: middle;
 }
 
 #rightButton::before {
   content: "→";
+  line-height: 50px;
+  vertical-align: middle;
 }
 
 /* Font for buttons */
