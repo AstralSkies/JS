@@ -11,6 +11,8 @@ canvas.style.marginTop = (screenHeight - canvasHeight) / 2 + "px";
 
 canvas.focus(); // Focus the canvas to enable keyboard input
 
+
+
 const tileSize = 32;
 const playerColor = "purple";
 let enemyColor = "green";
@@ -188,71 +190,67 @@ function handleTouchStart(event) {
 }
 
 function handleTouchMove(event) {
-  event.preventDefault();
-  const touchMoveX = event.touches[0].clientX;
-  const touchMoveY = event.touches[0].clientY;
-
-  const touchDiffX = touchMoveX - touchStartX;
-  const touchDiffY = touchMoveY - touchStartY;
-
-  if (Math.abs(touchDiffX) > Math.abs(touchDiffY)) {
-    if (touchDiffX > 0) {
-      // Swipe right
-      player.x++;
-      lastFacingDirection = "right";
+    event.preventDefault();
+    const touchMoveX = event.touches[0].clientX;
+    const touchMoveY = event.touches[0].clientY;
+  
+    const touchDiffX = touchMoveX - touchStartX;
+    const touchDiffY = touchMoveY - touchStartY;
+  
+    const moveThreshold = 30; // Threshold to determine when to move the player
+  
+    let dx = 0;
+    let dy = 0;
+  
+    if (Math.abs(touchDiffX) > Math.abs(touchDiffY)) {
+      if (touchDiffX > moveThreshold) {
+        dx = 1;
+        lastFacingDirection = "right";
+      } else if (touchDiffX < -moveThreshold) {
+        dx = -1;
+        lastFacingDirection = "left";
+      }
     } else {
-      // Swipe left
-      player.x--;
-      lastFacingDirection = "left";
+      if (touchDiffY > moveThreshold) {
+        dy = 1;
+        lastFacingDirection = "down";
+      } else if (touchDiffY < -moveThreshold) {
+        dy = -1;
+        lastFacingDirection = "up";
+      }
     }
-  } else {
-    if (touchDiffY > 0) {
-      // Swipe down
-      player.y++;
-      lastFacingDirection = "down";
-    } else {
-      // Swipe up
-      player.y--;
-      lastFacingDirection = "up";
+  
+    if (dx !== 0 || dy !== 0) {
+      // Only update the touch start position if we're actually moving the player
+      touchStartX = touchMoveX;
+      touchStartY = touchMoveY;
+  
+      const newX = player.x + dx;
+      const newY = player.y + dy;
+  
+      if (!isColliding(newX, newY)) {
+        player.x = newX;
+        player.y = newY;
+      }
     }
-  }
-  touchStartX = touchMoveX;
-  touchStartY = touchMoveY;
-
-  // Collision detection
-  if (isColliding(player.x, player.y)) {
+  
+    // Direction detection
     switch (lastFacingDirection) {
       case "up":
-        player.y++;
+        player.color = "red";
         break;
       case "down":
-        player.y--;
+        player.color = "blue";
         break;
       case "left":
-        player.x++;
+        player.color = "yellow";
         break;
       case "right":
-        player.x--;
+        player.color = "purple";
         break;
     }
   }
-
-  // Direction detection
-  switch (lastFacingDirection) {
-    case "up":
-      player.color = "red";
-      break;
-    case "down":
-      player.color = "blue";
-      break;
-      case "left":
-player.color = "pink";
-break;
-    case "right":
-      player.color = "pink";
-      break;
-  }
-}
+  
 
 // Draw text on the canvas if enemies are killed
 let killedEnemies = 0;
@@ -374,11 +372,7 @@ function gameLoop() {
   // Direction detection
   drawText(`Last facing direction: ${lastFacingDirection}`, 10, 100);
 }
-// Handle touch events
-canvas.addEventListener("touchstart", handleTouchStart, {
-  passive: false,
-});
-canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+
 canvas.addEventListener("keydown", handleKeydown);
 canvas.addEventListener("keydown", (event) => {
   if (event.key === " ") {
@@ -390,6 +384,42 @@ fireButton.addEventListener("touchstart", (event) => {
   event.preventDefault(); // Prevent the button from stealing focus
   shootLasers();
 });
+rightButton.addEventListener("touchstart", (event) => {
+    event.preventDefault(); // Prevent the button from stealing focus
+    const newX = player.x + 1;
+    if (!isColliding(newX, player.y)) {
+      player.x = newX;
+      lastFacingDirection = "right";
+    }
+  });
+  
+  leftButton.addEventListener("touchstart", (event) => {
+    event.preventDefault(); // Prevent the button from stealing focus
+    const newX = player.x - 1;
+    if (!isColliding(newX, player.y)) {
+      player.x = newX;
+      lastFacingDirection = "left";
+    }
+  });
+  
+  upButton.addEventListener("touchstart", (event) => {
+    event.preventDefault(); // Prevent the button from stealing focus
+    const newY = player.y - 1;
+    if (!isColliding(player.x, newY)) {
+      player.y = newY;
+      lastFacingDirection = "up";
+    }
+  });
+  
+  downButton.addEventListener("touchstart", (event) => {
+    event.preventDefault(); // Prevent the button from stealing focus
+    const newY = player.y + 1;
+    if (!isColliding(player.x, newY)) {
+      player.y = newY;
+      lastFacingDirection = "down";
+    }
+  });
+
 window.onload = function () {
   canvas.focus();
 };
