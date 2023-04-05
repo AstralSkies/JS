@@ -1,97 +1,116 @@
 /* Container styles */
 .container {
-    position: relative;
-    width: 300px;
-    height: 400px;
-    margin: 0 auto;
-    background-color: white;
-    overflow: hidden;
-  }
-  
-  /* Canvas styles */
-  canvas {
-    position: absolute;
-    max-width: 100%;
-    height: auto;
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  background-color: white;
+  overflow: hidden;
+}
+
+/* Canvas styles */
+canvas {
+  position: absolute;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Button styles */
+.button {
+  position: absolute;
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  z-index: 1;
+  display: none;
+  text-align: center;
+  line-height: 50px;
+  font-size: 24px;
+  color: white;
+}
+
+#leftButton {
+  left: 10%;
+  bottom: 10%;
+}
+
+#upButton {
+  left: 20%;
+  bottom: 16%;
+}
+
+#downButton {
+  left: 20%;
+  bottom: 4%;
+}
+
+#rightButton {
+  left: 30%;
+  bottom: 10%;
+}
+
+#fireButton {
+  background-color: grey;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  z-index: 1;
+  bottom: 10%;
+  left: 80%;
+}
+
+/* Hover styles */
+.button:hover,
+#leftButton:hover,
+#upButton:hover,
+#downButton:hover,
+#rightButton:hover,
+#fireButton:hover {
+  background-color: darkred;
+  cursor: pointer;
+}
+
+/* Active (press down) styles */
+.button:active,
+#leftButton:active,
+#upButton:active,
+#downButton:active,
+#rightButton:active,
+#fireButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* Media query for non-laptop-sized devices (less than 1024px) */
+@media screen and (max-width: 1023px) {
+  .button {
     display: block;
   }
-  
-  /* Button styles */
-  .button {
-    position: absolute;
-    background-color: red;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    z-index: 1;
-    display: none;
-  }
-  
-  #leftButton {
-    left:  6%;
-    bottom: 8.9%;
-  }
-  
-  #upButton {
-    left: 20%;
-    bottom: 15%;
-  }
-  
-  #downButton {
-    left: 20%;
-    bottom: 4%;
-  }
-  
-  #rightButton {
-    left: 35%;
+}
 
-    bottom: 8.9%;
+/* Media query for laptop-sized devices (greater than 1024px)  re-center the canvas */
+@media screen and (min-width: 1024px) {
+  canvas {
+    left: 50%;
+    transform: translateX(-50%);
   }
-  
-  #fireButton {
-    background-color: grey;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    z-index: 1;
-    bottom: 8.9%;
-    left: 80%;
-  }
-  
-  /* Hover styles */
-  .button:hover,
-  #leftButton:hover,
-  #upButton:hover,
-  #downButton:hover,
-  #rightButton:hover,
-  #fireButton:hover {
-    background-color: darkred;
-    cursor: pointer;
-  }
-  
-  /* Active (press down) styles */
-  .button:active,
-  #leftButton:active,
-  #upButton:active,
-  #downButton:active,
-  #rightButton:active,
-  #fireButton:active {
-    transform: translateY(2px);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Media query for non-laptop-sized devices (less than 1024px) */
-  @media screen and (max-width: 1023px) {
-    .button {
-      display: block;
-    }
-  }
-  
-  /* Media query for laptop-sized devices (greater than 1024px)  re-center the canvas */
-    @media screen and (min-width: 1024px) {
-        canvas {
-        left: 50%;
-        transform: translateX(-50%);
-        }
-    }
-  
+}
+
+/* Arrow characters */
+#leftButton::before {
+  content: "←";
+}
+
+#upButton::before {
+  content: "↑";
+}
+
+#downButton::before {
+  content: "↓";
+}
+
+#rightButton::before {
+  content: "→";
+}
