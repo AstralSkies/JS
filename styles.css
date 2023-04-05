@@ -35,23 +35,24 @@ canvas {
   font-family: 'Press Start 2P', cursive;
   border: 2px solid #000; /* Add a 2px black stroke around the circle */
 }
+
 #leftButton {
-  left: 10%;
+  left: calc(10% - 25px); /* Adjust position to center */
   bottom: 10%;
 }
 
 #upButton {
-  left: 20%;
+  left: calc(20% - 25px); /* Adjust position to center */
   bottom: 16%;
 }
 
 #downButton {
-  left: 20%;
+  left: calc(20% - 25px); /* Adjust position to center */
   bottom: 4%;
 }
 
 #rightButton {
-  left: 30%;
+  left: calc(30% - 25px); /* Adjust position to center */
   bottom: 10%;
 }
 
@@ -106,26 +107,20 @@ canvas {
 /* Arrow characters */
 #leftButton::before {
   content: "←";
-  line-height: 50px;
-  vertical-align: middle;
+  /* position the arrow character slightly higher */
+
 }
 
 #upButton::before {
   content: "↑";
-  line-height: 50px;
-  vertical-align: middle;
 }
 
 #downButton::before {
   content: "↓";
-  line-height: 50px;
-  vertical-align: middle;
 }
 
 #rightButton::before {
   content: "→";
-  line-height: 50px;
-  vertical-align: middle;
 }
 
 /* Font for buttons */
