@@ -120,6 +120,19 @@ function isColliding(x, y) {
 
   return false;
 }
+let movementInterval = null;
+
+function movePlayer(dx, dy) {
+  const newX = player.x + dx;
+  const newY = player.y + dy;
+
+  if (!isColliding(newX, newY)) {
+    player.x = newX;
+    player.y = newY;
+  }
+
+  lastFacingDirection = dy === -1 ? 'up' : dy === 1 ? 'down' : dx === -1 ? 'left' : 'right';
+}
 
 let lastFacingDirection = "right";
 
@@ -384,41 +397,49 @@ fireButton.addEventListener("touchstart", (event) => {
   event.preventDefault(); // Prevent the button from stealing focus
   shootLasers();
 });
-rightButton.addEventListener("touchstart", (event) => {
-    event.preventDefault(); // Prevent the button from stealing focus
-    const newX = player.x + 1;
-    if (!isColliding(newX, player.y)) {
-      player.x = newX;
-      lastFacingDirection = "right";
-    }
-  });
-  
-  leftButton.addEventListener("touchstart", (event) => {
-    event.preventDefault(); // Prevent the button from stealing focus
-    const newX = player.x - 1;
-    if (!isColliding(newX, player.y)) {
-      player.x = newX;
-      lastFacingDirection = "left";
-    }
-  });
-  
-  upButton.addEventListener("touchstart", (event) => {
-    event.preventDefault(); // Prevent the button from stealing focus
-    const newY = player.y - 1;
-    if (!isColliding(player.x, newY)) {
-      player.y = newY;
-      lastFacingDirection = "up";
-    }
-  });
-  
-  downButton.addEventListener("touchstart", (event) => {
-    event.preventDefault(); // Prevent the button from stealing focus
-    const newY = player.y + 1;
-    if (!isColliding(player.x, newY)) {
-      player.y = newY;
-      lastFacingDirection = "down";
-    }
-  });
+rightButton.addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  if (movementInterval) clearInterval(movementInterval);
+  movementInterval = setInterval(() => movePlayer(1, 0), 100);
+});
+
+rightButton.addEventListener('touchend', (event) => {
+  event.preventDefault();
+  clearInterval(movementInterval);
+});
+
+leftButton.addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  if (movementInterval) clearInterval(movementInterval);
+  movementInterval = setInterval(() => movePlayer(-1, 0), 100);
+});
+
+leftButton.addEventListener('touchend', (event) => {
+  event.preventDefault();
+  clearInterval(movementInterval);
+});
+
+upButton.addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  if (movementInterval) clearInterval(movementInterval);
+  movementInterval = setInterval(() => movePlayer(0, -1), 100);
+});
+
+upButton.addEventListener('touchend', (event) => {
+  event.preventDefault();
+  clearInterval(movementInterval);
+});
+
+downButton.addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  if (movementInterval) clearInterval(movementInterval);
+  movementInterval = setInterval(() => movePlayer(0, 1), 100);
+});
+
+downButton.addEventListener('touchend', (event) => {
+  event.preventDefault();
+  clearInterval(movementInterval);
+});
 
 window.onload = function () {
   canvas.focus();
