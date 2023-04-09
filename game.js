@@ -421,10 +421,6 @@ leftButton.addEventListener('touchstart', (event) => {
   if (movementInterval){
      clearInterval(movementInterval);
   movementInterval = setInterval(() => movePlayer(-1, 0), 100)}
-  else{
-    // move the player once
-    movePlayer(-1, 0)
-  }
 });
 
 leftButton.addEventListener('touchend', (event) => {
@@ -434,12 +430,8 @@ leftButton.addEventListener('touchend', (event) => {
 
 upButton.addEventListener('touchstart', (event) => {
   event.preventDefault();
-  if (movementInterval){ clearInterval(movementInterval);
-  movementInterval = setInterval(() => movePlayer(0, -1), 100)}
-  else{
-    // move the player once
-    movePlayer(0, -1)
-  }
+  if (movementInterval) clearInterval(movementInterval);
+  movementInterval = setInterval(() => movePlayer(0, -1), 100);
 });
 
 upButton.addEventListener('touchend', (event) => {
@@ -449,13 +441,8 @@ upButton.addEventListener('touchend', (event) => {
 
 downButton.addEventListener('touchstart', (event) => {
   event.preventDefault();
-  if (movementInterval) {clearInterval(movementInterval)
-  movementInterval = setInterval(() => movePlayer(0, 1), 100)
-  }
-  else{
-    // move the player once
-    movePlayer(0, 1)
-  }
+  if (movementInterval) clearInterval(movementInterval);
+  movementInterval = setInterval(() => movePlayer(0, 1), 100);
 });
 
 downButton.addEventListener('touchend', (event) => {
