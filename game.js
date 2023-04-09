@@ -405,10 +405,6 @@ rightButton.addEventListener('touchstart', (event) => {
 
   clearInterval(movementInterval)
   movementInterval = setInterval(() => movePlayer(1, 0), 100)}
-  else{
-    // move the player once
-    movePlayer(1, 0)
-  }
 });
 
 rightButton.addEventListener('touchend', (event) => {
